@@ -1,0 +1,27 @@
+{
+  "name": "Catálogo Pokémon TCG",
+  "short_name": "Pokémon TCG",
+  "description": "Explore e monte seu deck de cartas Pokémon TCG",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["games", "entertainment", "lifestyle"],
+  "lang": "pt-BR",
+  "dir": "ltr"
+}

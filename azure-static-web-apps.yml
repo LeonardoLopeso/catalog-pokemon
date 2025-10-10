@@ -1,0 +1,8 @@
+name: catalog-pokemon
+trigger: push
+branch: main
+location: /
+app_location: /
+api_location: api
+output_location: .next
+build_command: npm run build

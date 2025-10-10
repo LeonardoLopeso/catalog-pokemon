@@ -1,0 +1,24 @@
+{
+  "name": "Catálogo Pokémon TCG",
+  "description": "Explore e monte seu deck de cartas Pokémon TCG",
+  "repository": "https://github.com/yourusername/catalog-pokemon",
+  "logo": "https://raw.githubusercontent.com/yourusername/catalog-pokemon/main/public/logo.png",
+  "keywords": ["pokemon", "tcg", "cartas", "deck", "nextjs", "react"],
+  "env": {
+    "NODE_ENV": {
+      "description": "Environment",
+      "value": "production"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
