@@ -1,8 +1,9 @@
 'use client';
 
-import { PokemonCard } from '@/components/pokemon-card';
+import { CardFullscreenModal, PokemonCard } from '@/components';
 import { formatNumber } from '@/lib/utils';
 import { useDeckStore, useListStore } from '@/stores';
+import { PokemonCard as PokemonCardType } from '@/types';
 import { ArrowLeft, Download, Share2, Star, Trash2, Upload } from 'lucide-react';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
@@ -12,6 +13,8 @@ export default function MinhaListaPage() {
   const { addCard: addToDeck } = useDeckStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [isImporting, setIsImporting] = useState(false);
+  const [fullscreenCard, setFullscreenCard] = useState<PokemonCardType | null>(null);
+  const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const stats = getListStats();
 
@@ -23,6 +26,16 @@ export default function MinhaListaPage() {
 
   const handleAddToDeck = (card: any) => {
     addToDeck(card);
+  };
+
+  const handleFullscreen = (card: PokemonCardType) => {
+    setFullscreenCard(card);
+    setIsFullscreenOpen(true);
+  };
+
+  const handleCloseFullscreen = () => {
+    setIsFullscreenOpen(false);
+    setFullscreenCard(null);
   };
 
   const handleExportList = () => {
@@ -328,14 +341,16 @@ export default function MinhaListaPage() {
                     <PokemonCard
                       card={listCard.card}
                       onAddToDeck={handleAddToDeck}
+                      onFullscreen={handleFullscreen}
                       showAddButton={true}
                       showAddToListButton={false}
+                      showFullscreenButton={true}
                     />
                     
                     {/* Remove Button */}
                     <button
                       onClick={() => handleRemoveFromList(listCard.card.id)}
-                      className="absolute top-2 left-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
+                      className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors z-10"
                       title="Remover da lista"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -360,6 +375,13 @@ export default function MinhaListaPage() {
           </>
         )}
       </main>
+
+      {/* Card Fullscreen Modal */}
+      <CardFullscreenModal
+        card={fullscreenCard}
+        isOpen={isFullscreenOpen}
+        onClose={handleCloseFullscreen}
+      />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { PokemonCard as PokemonCardType } from '@/types';
-import { Plus, Star } from 'lucide-react';
+import { Plus, Star, ZoomIn } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -9,22 +9,26 @@ interface PokemonCardProps {
   card: PokemonCardType;
   onAddToDeck?: (card: PokemonCardType) => void;
   onAddToList?: (card: PokemonCardType) => void;
+  onFullscreen?: (card: PokemonCardType) => void;
   isInDeck?: boolean;
   isInList?: boolean;
   deckQuantity?: number;
   showAddButton?: boolean;
   showAddToListButton?: boolean;
+  showFullscreenButton?: boolean;
 }
 
 export function PokemonCard({
   card,
   onAddToDeck,
   onAddToList,
+  onFullscreen,
   isInDeck = false,
   isInList = false,
   deckQuantity = 0,
   showAddButton = true,
   showAddToListButton = true,
+  showFullscreenButton = true,
 }: PokemonCardProps) {
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -37,6 +41,11 @@ export function PokemonCard({
   const handleAddToList = (e: React.MouseEvent) => {
     e.stopPropagation();
     onAddToList?.(card);
+  };
+
+  const handleFullscreen = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onFullscreen?.(card);
   };
 
   const getRarityColor = (rarity: string) => {
@@ -91,6 +100,17 @@ export function PokemonCard({
               <p className="text-sm">Imagem não disponível</p>
             </div>
           </div>
+        )}
+
+        {/* Botão de tela cheia */}
+        {showFullscreenButton && (
+          <button
+            onClick={handleFullscreen}
+            className="absolute top-2 left-2 p-2 bg-black/70 text-white rounded-full hover:bg-black/90 transition-all duration-200 opacity-0 group-hover:opacity-100 z-30 shadow-lg hover:shadow-xl"
+            title="Ver em tela cheia"
+          >
+            <ZoomIn className="w-4 h-4 sm:w-5 sm:h-5" />
+          </button>
         )}
 
         {/* Overlay com botões de adicionar */}

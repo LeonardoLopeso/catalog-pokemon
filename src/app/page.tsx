@@ -1,9 +1,10 @@
 'use client';
 
-import { DeckModal, PokemonCard, SearchBar } from '@/components';
+import { CardFullscreenModal, DeckModal, PokemonCard, SearchBar } from '@/components';
 import { QueryProvider } from '@/components/providers/query-provider';
 import { usePokemonSearch } from '@/hooks';
 import { useDeckStore, useListStore } from '@/stores';
+import { PokemonCard as PokemonCardType } from '@/types';
 import { Flame, Shield, Sparkles, Star, Zap } from 'lucide-react';
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
@@ -11,6 +12,8 @@ import { useCallback, useEffect, useState } from 'react';
 function PokemonSearchContent() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isClient, setIsClient] = useState(false);
+  const [fullscreenCard, setFullscreenCard] = useState<PokemonCardType | null>(null);
+  const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
   const { addCard, getTotalCards, toggleModal } = useDeckStore();
   const { addCard: addToList, cards: listCards } = useListStore();
   
@@ -69,6 +72,16 @@ function PokemonSearchContent() {
   const handleAddToList = useCallback((card: any) => {
     addToList(card);
   }, [addToList]);
+
+  const handleFullscreen = useCallback((card: PokemonCardType) => {
+    setFullscreenCard(card);
+    setIsFullscreenOpen(true);
+  }, []);
+
+  const handleCloseFullscreen = useCallback(() => {
+    setIsFullscreenOpen(false);
+    setFullscreenCard(null);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
@@ -204,9 +217,11 @@ function PokemonSearchContent() {
                                   card={card}
                                   onAddToDeck={handleAddToDeck}
                                   onAddToList={handleAddToList}
+                                  onFullscreen={handleFullscreen}
                                   isInList={listCards.some(listCard => listCard.card.id === card.id)}
                                   showAddButton={true}
                                   showAddToListButton={true}
+                                  showFullscreenButton={true}
                                 />
                       </div>
                     ))}
@@ -239,6 +254,13 @@ function PokemonSearchContent() {
 
       {/* Deck Modal */}
       <DeckModal />
+      
+      {/* Card Fullscreen Modal */}
+      <CardFullscreenModal
+        card={fullscreenCard}
+        isOpen={isFullscreenOpen}
+        onClose={handleCloseFullscreen}
+      />
       </div>
   );
 }

@@ -1,13 +1,16 @@
 'use client';
 
-import { PokemonCard } from '@/components/pokemon-card';
+import { CardFullscreenModal, PokemonCard } from '@/components';
 import { formatNumber } from '@/lib/utils';
 import { useDeckStore } from '@/stores';
+import { PokemonCard as PokemonCardType } from '@/types';
 import { Download, Share2, Trash2, X } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export function DeckModal() {
   const { deck, clearDeck, getDeckStats, isModalOpen, closeModal } = useDeckStore();
+  const [fullscreenCard, setFullscreenCard] = useState<PokemonCardType | null>(null);
+  const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
   const stats = getDeckStats();
 
   // Bloquear scroll do body quando modal estiver aberto
@@ -70,6 +73,16 @@ export function DeckModal() {
           .join('\n')}`
       );
     }
+  };
+
+  const handleFullscreen = (card: PokemonCardType) => {
+    setFullscreenCard(card);
+    setIsFullscreenOpen(true);
+  };
+
+  const handleCloseFullscreen = () => {
+    setIsFullscreenOpen(false);
+    setFullscreenCard(null);
   };
 
   return (
@@ -190,9 +203,11 @@ export function DeckModal() {
                         >
                           <PokemonCard
                             card={deckCard.card}
+                            onFullscreen={handleFullscreen}
                             isInDeck={true}
                             deckQuantity={deckCard.quantity}
                             showAddButton={false}
+                            showFullscreenButton={true}
                           />
                         </div>
                       ))}
@@ -221,6 +236,13 @@ export function DeckModal() {
           </div>
         </>
       )}
+
+      {/* Card Fullscreen Modal */}
+      <CardFullscreenModal
+        card={fullscreenCard}
+        isOpen={isFullscreenOpen}
+        onClose={handleCloseFullscreen}
+      />
     </>
   );
 }
