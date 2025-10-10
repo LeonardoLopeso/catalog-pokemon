@@ -79,8 +79,8 @@ export function SearchBar({
     <div className={`relative ${className}`}>
       <form onSubmit={handleSubmit} className="relative">
         <div className="relative">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-5 w-5 text-gray-400" />
+          <div className="absolute inset-y-0 left-0 pl-2 sm:pl-3 flex items-center pointer-events-none">
+            <Search className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
           </div>
           
           <input
@@ -94,28 +94,28 @@ export function SearchBar({
               setTimeout(() => setShowHistoryDropdown(false), 150);
             }}
             placeholder={placeholder}
-            className="w-full pl-10 pr-20 py-3 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-pokemon-blue focus:border-transparent outline-none transition-all duration-200 bg-white shadow-sm"
+            className="w-full pl-8 sm:pl-10 pr-16 sm:pr-20 py-2.5 sm:py-3 border border-gray-300 rounded-xl sm:rounded-2xl focus:ring-2 focus:ring-pokemon-blue focus:border-transparent outline-none transition-all duration-200 bg-white shadow-sm text-sm sm:text-base"
           />
           
           {query && (
             <button
               type="button"
               onClick={handleClear}
-              className="absolute inset-y-0 right-12 flex items-center pr-3 text-gray-400 hover:text-gray-600 transition-colors"
+              className="absolute inset-y-0 right-10 sm:right-12 flex items-center pr-2 sm:pr-3 text-gray-400 hover:text-gray-600 transition-colors"
             >
-              <X className="h-5 w-5" />
+              <X className="h-4 w-4 sm:h-5 sm:w-5" />
             </button>
           )}
           
-          <div className="absolute inset-y-0 right-0 flex items-center pr-3 space-x-1">
+          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:pr-3 space-x-0.5 sm:space-x-1">
             {isClient && showHistory && history.length > 0 && (
               <button
                 type="button"
                 onClick={() => setShowHistoryDropdown(!showHistoryDropdown)}
-                className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+                className="p-0.5 sm:p-1 text-gray-400 hover:text-gray-600 transition-colors"
                 title="Histórico de buscas"
               >
-                <History className="h-5 w-5" />
+                <History className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
             )}
             
@@ -123,10 +123,10 @@ export function SearchBar({
               <button
                 type="button"
                 onClick={() => setShowFiltersDropdown(!showFiltersDropdown)}
-                className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+                className="p-0.5 sm:p-1 text-gray-400 hover:text-gray-600 transition-colors"
                 title="Filtros"
               >
-                <Filter className="h-5 w-5" />
+                <Filter className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
             )}
 
@@ -134,11 +134,11 @@ export function SearchBar({
               <button
                 type="button"
                 onClick={onSearchClick}
-                className="px-3 py-1 bg-pokemon-blue text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center space-x-1"
+                className="px-2 sm:px-3 py-1 bg-pokemon-blue text-white rounded-lg hover:bg-blue-600 transition-colors flex items-center space-x-1"
                 title="Buscar cartas"
               >
-                <Search className="h-4 w-4" />
-                <span className="text-sm font-medium">Buscar</span>
+                <Search className="h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="text-xs sm:text-sm font-medium hidden sm:inline">Buscar</span>
               </button>
             )}
           </div>

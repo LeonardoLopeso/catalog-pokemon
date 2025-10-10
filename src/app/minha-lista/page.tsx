@@ -152,64 +152,64 @@ export default function MinhaListaPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header */}
       <header className="sticky top-0 z-30 glass-effect border-b border-white/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <div className="flex items-center justify-between h-14 sm:h-16">
             {/* Back Button */}
             <Link
               href="/"
-              className="flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="flex items-center space-x-1 sm:space-x-2 text-gray-600 hover:text-gray-900 transition-colors flex-shrink-0"
             >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Voltar</span>
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="text-sm sm:text-base">Voltar</span>
             </Link>
 
             {/* Title */}
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 pokemon-gradient rounded-xl flex items-center justify-center">
-                <Star className="w-6 h-6 text-white" />
+            <div className="flex items-center space-x-2 sm:space-x-3 flex-1 min-w-0 justify-center">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 pokemon-gradient rounded-xl flex items-center justify-center flex-shrink-0">
+                <Star className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
               </div>
-              <div>
-                <h1 className="text-xl font-bold text-gradient font-orbitron">
+              <div className="min-w-0 flex-1 text-center">
+                <h1 className="text-base sm:text-xl font-bold text-gradient font-orbitron truncate">
                   Minha Lista
                 </h1>
-                <p className="text-sm text-gray-600">
+                <p className="text-xs sm:text-sm text-gray-600">
                   {formatNumber(cards.length)} cartas salvas
                 </p>
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-1 flex-shrink-0">
               <button
                 onClick={handleImportList}
                 disabled={isImporting}
-                className="p-2 rounded-full bg-green-100 hover:bg-green-200 transition-colors disabled:opacity-50"
+                className="p-1.5 rounded-full bg-green-100 hover:bg-green-200 transition-colors disabled:opacity-50"
                 title="Importar lista"
               >
-                <Upload className="w-5 h-5" />
+                <Upload className="w-4 h-4" />
               </button>
               
               <button
                 onClick={handleExportList}
-                className="p-2 rounded-full bg-blue-100 hover:bg-blue-200 transition-colors"
+                className="p-1.5 rounded-full bg-blue-100 hover:bg-blue-200 transition-colors"
                 title="Exportar lista"
               >
-                <Download className="w-5 h-5" />
+                <Download className="w-4 h-4" />
               </button>
               
               <button
                 onClick={handleShareList}
-                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                className="p-1.5 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
                 title="Compartilhar lista"
               >
-                <Share2 className="w-5 h-5" />
+                <Share2 className="w-4 h-4" />
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         {/* Hidden file input */}
         <input
           ref={fileInputRef}
@@ -221,20 +221,20 @@ export default function MinhaListaPage() {
 
         {cards.length === 0 ? (
           /* Empty state */
-          <div className="text-center py-12">
-            <div className="max-w-md mx-auto">
-              <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
-                <Star className="w-8 h-8 text-gray-500" />
+          <div className="text-center py-8 sm:py-12">
+            <div className="max-w-md mx-auto px-4">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+                <Star className="w-6 h-6 sm:w-8 sm:h-8 text-gray-500" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">
                 Sua lista está vazia
               </h3>
-              <p className="text-gray-600 mb-6">
+              <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">
                 Adicione cartas à sua lista para começar a organizar sua coleção.
               </p>
               <Link
                 href="/"
-                className="px-6 py-3 pokemon-gradient text-white rounded-xl font-medium hover:shadow-lg transition-all"
+                className="px-4 sm:px-6 py-2.5 sm:py-3 pokemon-gradient text-white rounded-xl font-medium hover:shadow-lg transition-all text-sm sm:text-base"
               >
                 Explorar cartas
               </Link>
@@ -243,58 +243,58 @@ export default function MinhaListaPage() {
         ) : (
           <>
             {/* Stats */}
-            <div className="mb-8">
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="mb-6 sm:mb-8">
+              <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-sm border border-gray-200">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-pokemon-purple">
+                    <div className="text-lg sm:text-2xl font-bold text-pokemon-purple">
                       {formatNumber(stats.totalCards)}
                     </div>
-                    <div className="text-sm text-gray-600">Total</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Total</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-pokemon-green">
+                    <div className="text-lg sm:text-2xl font-bold text-pokemon-green">
                       {formatNumber(stats.uniqueCards)}
                     </div>
-                    <div className="text-sm text-gray-600">Únicas</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Únicas</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-pokemon-blue">
+                    <div className="text-lg sm:text-2xl font-bold text-pokemon-blue">
                       {Object.keys(stats.byRarity).length}
                     </div>
-                    <div className="text-sm text-gray-600">Raridades</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Raridades</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-pokemon-yellow">
+                    <div className="text-lg sm:text-2xl font-bold text-pokemon-yellow">
                       {Object.keys(stats.byType).length}
                     </div>
-                    <div className="text-sm text-gray-600">Tipos</div>
+                    <div className="text-xs sm:text-sm text-gray-600">Tipos</div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Import/Export Instructions */}
-            <div className="mb-8">
-              <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6 border border-blue-200">
-                <div className="flex items-start space-x-4">
+            <div className="mb-6 sm:mb-8">
+              <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-blue-200">
+                <div className="flex items-start space-x-3 sm:space-x-4">
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-                      <Upload className="w-6 h-6 text-blue-600" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center">
+                      <Upload className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                    <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">
                       Compartilhe sua lista com outros usuários!
                     </h3>
-                    <p className="text-gray-600 mb-3">
+                    <p className="text-sm sm:text-base text-gray-600 mb-3">
                       Use os botões de <strong>Exportar</strong> e <strong>Importar</strong> para compartilhar sua lista com outros jogadores.
                     </p>
-                    <div className="flex flex-wrap gap-2 text-sm">
-                      <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
+                    <div className="flex flex-wrap gap-1 sm:gap-2 text-xs sm:text-sm">
+                      <span className="px-2 sm:px-3 py-1 bg-blue-100 text-blue-800 rounded-full">
                         📤 Exportar: Salva sua lista em um arquivo
                       </span>
-                      <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full">
+                      <span className="px-2 sm:px-3 py-1 bg-green-100 text-green-800 rounded-full">
                         📥 Importar: Carrega uma lista de outro usuário
                       </span>
                     </div>
@@ -304,20 +304,20 @@ export default function MinhaListaPage() {
             </div>
 
             {/* Search */}
-            <div className="mb-8">
+            <div className="mb-6 sm:mb-8">
               <div className="max-w-md mx-auto">
                 <input
                   type="text"
                   placeholder="Buscar na sua lista..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pokemon-purple focus:border-transparent"
+                  className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pokemon-purple focus:border-transparent text-sm sm:text-base"
                 />
               </div>
             </div>
 
             {/* Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-6">
               {filteredCards.map((listCard, index) => (
                 <div
                   key={listCard.card.id}
@@ -347,12 +347,12 @@ export default function MinhaListaPage() {
 
             {/* Clear List Button */}
             {cards.length > 0 && (
-              <div className="mt-8 text-center">
+              <div className="mt-6 sm:mt-8 text-center">
                 <button
                   onClick={handleClearList}
-                  className="px-6 py-3 text-red-600 hover:bg-red-50 rounded-xl transition-colors flex items-center space-x-2 mx-auto"
+                  className="px-4 sm:px-6 py-2.5 sm:py-3 text-red-600 hover:bg-red-50 rounded-xl transition-colors flex items-center space-x-2 mx-auto text-sm sm:text-base"
                 >
-                  <Trash2 className="w-5 h-5" />
+                  <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span>Limpar lista</span>
                 </button>
               </div>

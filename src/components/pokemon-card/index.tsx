@@ -100,15 +100,18 @@ export function PokemonCard({
               isHovered ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-1 sm:space-y-2 p-2">
               {showAddButton && (
                 <button
                   onClick={handleAddToDeck}
-                  className="flex items-center space-x-2 px-4 py-2 bg-white text-gray-900 rounded-xl font-medium hover:bg-gray-100 transition-colors"
+                  className="flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 bg-white text-gray-900 rounded-lg sm:rounded-xl font-medium hover:bg-gray-100 transition-colors text-xs sm:text-sm"
                 >
-                  <Plus className="w-4 h-4" />
-                  <span>
+                  <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">
                     {isInDeck ? `Adicionar (${deckQuantity})` : 'Adicionar ao Deck'}
+                  </span>
+                  <span className="sm:hidden">
+                    {isInDeck ? `+${deckQuantity}` : 'Deck'}
                   </span>
                 </button>
               )}
@@ -116,15 +119,18 @@ export function PokemonCard({
               {showAddToListButton && (
                 <button
                   onClick={handleAddToList}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-xl font-medium transition-colors ${
+                  className={`flex items-center space-x-1 sm:space-x-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl font-medium transition-colors text-xs sm:text-sm ${
                     isInList 
                       ? 'bg-green-100 text-green-800 hover:bg-green-200' 
                       : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
                   }`}
                 >
-                  <Star className="w-4 h-4" />
-                  <span>
+                  <Star className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="hidden sm:inline">
                     {isInList ? 'Na Lista' : 'Adicionar à Lista'}
+                  </span>
+                  <span className="sm:hidden">
+                    {isInList ? 'Lista' : 'Lista'}
                   </span>
                 </button>
               )}
@@ -141,37 +147,39 @@ export function PokemonCard({
       </div>
 
       {/* Card Info */}
-      <div className="p-4">
+      <div className="p-2 sm:p-4">
         <div className="flex items-start justify-between mb-2">
-          <h3 className="font-semibold text-gray-900 text-sm leading-tight">
-            {card.name}
+          <h3 className="font-semibold text-gray-900 text-xs sm:text-sm leading-tight flex-1 min-w-0">
+            <span className="truncate block">{card.name}</span>
           </h3>
-          <div className="flex-shrink-0 ml-2">
+          <div className="flex-shrink-0 ml-1 sm:ml-2">
             <span
-              className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${getRarityColor(
+              className={`inline-block px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium ${getRarityColor(
                 card.rarity
               )}`}
             >
-              {card.rarity}
+              <span className="hidden sm:inline">{card.rarity}</span>
+              <span className="sm:hidden">{card.rarity.split(' ')[0]}</span>
             </span>
           </div>
         </div>
 
         {/* Types */}
         {card.types && card.types.length > 0 && (
-          <div className="flex flex-wrap gap-1 mb-2">
+          <div className="flex flex-wrap gap-0.5 sm:gap-1 mb-2">
             {card.types.slice(0, 2).map((type, index) => (
               <span
                 key={index}
-                className={`px-2 py-1 rounded-full text-xs font-medium text-white ${getTypeColor(
+                className={`px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium text-white ${getTypeColor(
                   type
                 )}`}
               >
-                {type}
+                <span className="hidden sm:inline">{type}</span>
+                <span className="sm:hidden">{type.substring(0, 3)}</span>
               </span>
             ))}
             {card.types.length > 2 && (
-              <span className="px-2 py-1 rounded-full text-xs font-medium text-gray-600 bg-gray-200">
+              <span className="px-1 sm:px-2 py-0.5 sm:py-1 rounded-full text-xs font-medium text-gray-600 bg-gray-200">
                 +{card.types.length - 2}
               </span>
             )}
@@ -180,8 +188,8 @@ export function PokemonCard({
 
         {/* Set Info */}
         <div className="text-xs text-gray-600">
-          <p className="font-medium">{card.set.name}</p>
-          <p className="text-gray-500">{card.set.series}</p>
+          <p className="font-medium truncate">{card.set.name}</p>
+          <p className="text-gray-500 truncate">{card.set.series}</p>
         </div>
 
         {/* Price Info (se disponível) */}
